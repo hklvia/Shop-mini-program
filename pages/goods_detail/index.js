@@ -225,7 +225,6 @@ Page({
         }
       }
     })
-// console.log(proSkus);
 
     proSkus.forEach(v=>{
       v.ProductSkuValues=[]
