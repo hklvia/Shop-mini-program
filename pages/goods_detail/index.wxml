@@ -1,0 +1,100 @@
+<view class="detail_swiper">
+  <swiper autoplay circular indicator-dots>
+    <swiper-item wx:for="{{goodsObj.ProductSlideImgs}}" wx:key="item" bindtap="handlePrevewImage" data-url="{{item}}">
+      <image mode="widthFix" src="{{item.CloudUrl}}"></image>
+    </swiper-item>
+  </swiper>
+</view>
+
+<!-- 商品价格 -->
+<view class="goods_price">￥<text>{{goodsObj.Price}}</text>
+
+  <view class="goods_collect" bindtap="handleCollect">
+    <text class="iconfont {{isCollect?'icon-favorfill':'icon-favor'}}"></text>
+    <view class="collect_text">收藏</view>
+  </view>
+
+</view>
+<view class="goods_name_row">
+  <view class="goods_name">{{goodsObj.ProductTitle}}</view>
+
+</view>
+<view class="sku_info_group" bind:tap="showSku">
+  <view class="sku_info_left">
+    <view class="sku_title">规格</view>
+    <view class="sku_info">{{skuDisInfo}}</view>
+  </view>
+  <view class="sku_info_right"></view>
+</view>
+<!-- 详情 -->
+<view class="goods_info">
+  <view class="goods_info_title">图文详情</view>
+  <view class="goods_info_content" wx:for="{{goodsObj.ProductDetail}}" wx:key="item">
+    <image mode="widthFix" src="{{item.CloudUrl}}"></image>
+    <!-- 富文本 -->
+    <!-- {{goodsObj.ProductDetail}} -->
+    <!-- <rich-text nodes="{{goodsObj.ProductDetail}}"></rich-text> -->
+  </view>
+</view>
+<!-- 底部工具栏 -->
+<view class="btm_tool">
+  <view class="tool_item">
+    <view class="iconfont icon-service"></view>
+    <view>客服</view>
+    <button open-type="contact"></button>
+  </view>
+  <view class="tool_item">
+    <view class="iconfont icon-share"></view>
+    <view>分享</view>
+    <button open-type="share"></button>
+  </view>
+  <navigator open-type="switchTab" url="/pages/cart/index" class="tool_item">
+    <view class="iconfont icon-cart"></view>
+    <view>购物车</view>
+  </navigator>
+  <view class="tool_item btn_cart " bindtap="handleCartAdd">加入购物车</view>
+  <view class="tool_item btn_buy">立即购买</view>
+</view>
+<van-popup show="{{ showSku }}" closeable position="bottom" round custom-style="height: 80%;" bind:close="onClose">
+  <view class="sku-list">
+    <view class="sku-title">
+      <image src="{{goodsObj.Img}}" />
+      <view class="sku-main">
+        <view>￥{{goodsObj.Price}}</view>
+        <text>剩余{{goodsObj.Stock}}件</text>
+        <text>已选择{{skuDisInfo}}</text>
+      </view>
+    </view>
+    <!-- <view class="sku-row"
+     wx:for="{{skuList.sku}}" wx:key="item"
+    >
+      <text>{{item[0].name}}</text>
+      <view class="sku-item">
+        <view>粉色</view>
+        <view>粉色</view>
+        <view>粉色</view>
+      </view>
+    </view> -->
+    <view class="skus">
+      <view class="sku-row" wx:for="{{goodsObj.ProductSkuValues}}" wx:key="id">
+        <text>{{item.name}}</text>
+        <view class="sku-item">
+          <view class="sku-item {{item1.value==item.selectedValue?'active':''}}" wx:for="{{item.values}}" wx:for-item="item1" wx:key="id" bind:tap="handleSkuChange" data-attrName="{{item.name}}" data-attrValue="{{item1.value}}">
+            {{item1.value}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="sku-num">
+      <text>购买数量</text>
+      <view>
+        <view>-</view>
+        <view>1</view>
+        <view>+</view>
+      </view>
+    </view>
+  </view>
+  <view class="sku-bottom">
+    <button>确认</button>
+  </view>
+</van-popup>

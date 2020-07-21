@@ -1,0 +1,66 @@
+.index_swiper swiper {
+  width: 750rpx;
+  height: 340rpx;
+  /* 图片横向充满屏幕 宽度自适应 */
+}
+
+.index_swiper swiper image {
+  width: 100%;
+}
+
+/* 导航栏样式 */
+.index_cate {
+  display: flex;
+}
+
+.index_cate navigator {
+  padding:20rpx 30rpx 20rpx 30rpx;
+  flex: 1;
+}
+
+.index_cate navigator image {
+  width: 100%;
+}
+
+/* 楼层样式 */
+.index_floor {
+  margin: 0rpx 10rpx;
+}
+
+.index_floor .floor_group .floor_title {
+  padding: 10rpx 0rpx;
+}
+
+.index_floor .floor_group .floor_title image {
+  width: 100%;
+}
+
+.index_floor .floor_group .floor_list {
+  /* 清除浮动 */
+  overflow: hidden;
+}
+
+.index_floor .floor_group .floor_list navigator {
+  float: left;
+  width: 33.33%;
+  /* 后四个超链接 */
+  /* 2 3 两个超链接 */
+}
+
+.index_floor .floor_group .floor_list navigator:nth-last-child(-n+4) {
+  /* 原图宽高 232*386 */
+  /* 232/386 = 33.33vm/height */
+  height: 27.72711207vw;
+  border-left: 10rpx solid #fff;
+}
+
+.index_floor .floor_group .floor_list navigator:nth-child(2),
+.index_floor .floor_group .floor_list navigator:nth-child(3) {
+  border-bottom: 10px solid #fff;
+}
+
+.index_floor .floor_group .floor_list navigator image {
+  border-radius: 15rpx;
+  height: 100%;
+  width: 100%;
+}
