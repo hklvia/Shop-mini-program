@@ -24,8 +24,6 @@ Page({
     });
 
     // cart.forEach(v => {
-    //   console.log(v);
-      
     //   v.ProductMainImg = v.ProductMainImg.CloudUrl
     // })
     this.setCart(cart);
