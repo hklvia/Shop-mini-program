@@ -16,6 +16,7 @@ Page({
     skuDisInfo: "",
     skus: [],
     proSkus: [],
+    isAddCart: true
   },
 
   // 商品对象
@@ -67,7 +68,7 @@ Page({
       isCollect,
       skuDisInfo: skuDisInfo,
       // skus:resData.skus,
-      proSkus:goodsObj.ProductSkus,
+      proSkus: goodsObj.ProductSkus,
       // skuList:{
       //   skuImg:JSON.parse(goodsObj.Product.ProductMainImg),
       //   Stock:goodsObj.Skus.Stock,
@@ -82,7 +83,6 @@ Page({
   handlePrevewImage(e) {
     // 1 先构造要预览的图片数组 
     var ProductSlideImgs = this.GoodsInfo.ProductSlideImgs
-
     const urls = []
     ProductSlideImgs.forEach(v => {
       urls.push(v.CloudUrl)
@@ -96,35 +96,50 @@ Page({
   },
 
   // 点击 加入购物车
-  handleCartAdd() {
-    this.setData({
-      showSku: true
-    });
-    // 1 获取缓存中的购物车， || []转换成数组格式
-    let cart = wx.getStorageSync("cart") || [];
-    // console.log(this.GoodsInfo);
-    // console.log(cart);
-    
-    // 2 判断 商品对象是否存在于购物车数组中
-    let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID);
-    if (index === -1) {
-      //3  不存在 第一次添加
-      this.GoodsInfo.num = 1;
-      this.GoodsInfo.checked = true;
-      cart.push(this.GoodsInfo);
-    } else {
-      // 4 已经存在购物车数据 执行 num++
-      cart[index].num++;
+  handleCartAdd(e) {
+    var that = this
+    // 点击skuInfo弹出两个按钮
+    if (e.currentTarget.dataset.name == 'skuInfo') {
+      this.setData({
+        isAddCart: false,
+        showSku: true
+      });
+      return;
+      // 点击加入购物车弹出一个按钮
+    } else if (e.currentTarget.dataset.name == 'catBtn') {
+      this.setData({
+        isAddCart: true,
+        showSku: true
+      });
+      return;
+      // 点击确认按钮加入购物车
+    } else if (e.currentTarget.dataset.name == 'ConfirmAddCart') {
+      // 1 获取缓存中的购物车， || []转换成数组格式
+      let cart = wx.getStorageSync("cart") || [];
+
+      // 2 判断 商品对象是否存在于购物车数组中
+      let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID);
+      if (index === -1) {
+        //3  不存在 第一次添加
+        that.GoodsInfo.num = 1;
+        that.GoodsInfo.checked = true;
+        cart.push(that.GoodsInfo);
+      } else {
+        // 4 已经存在购物车数据 执行 num++
+        cart[index].num++;
+      }
+      // 5 把购物车重新添加回缓存中
+      wx.setStorageSync("cart", cart);
+      // 6 弹窗提示
+      wx.showToast({
+        title: '加入成功',
+        icon: 'success',
+        // true 防止用户 手抖 疯狂点击按钮 
+        mask: true
+      });
     }
-    // 5 把购物车重新添加回缓存中
-    wx.setStorageSync("cart", cart);
-    // 6 弹窗提示
-    wx.showToast({
-      title: '加入成功',
-      icon: 'success',
-      // true 防止用户 手抖 疯狂点击按钮 
-      mask: true
-    });
+
+    // this.setData({});
   },
 
   // 点击 商品收藏图标
@@ -199,7 +214,7 @@ Page({
       proSkus
     } = this.data
     // console.log(this.data);
-    
+
     goodsObj.ProductSkuValues.forEach(v => {
       if (v.name == attrname) {
         v.selectedValue = attrvalue
@@ -214,11 +229,11 @@ Page({
       if (v.selectedValue != null) {
         skuDisInfo += v.selectedValue + ""
         skuList.push(v.selectedValue)
-        if (v.IsImg==1) {
+        if (v.IsImg == 1) {
           v.values.forEach(element => {
-            if (v.selectedValue==element.value) {
+            if (v.selectedValue == element.value) {
               this.setData({
-                "goodsObj.Img":element.SkuImg.CloudUrl
+                "goodsObj.Img": element.SkuImg.CloudUrl
               })
             }
           });
@@ -226,16 +241,16 @@ Page({
       }
     })
 
-    proSkus.forEach(v=>{
-      v.ProductSkuValues=[]
-      JSON.parse(v.ProductSku1).forEach(v_sku=>{
+    proSkus.forEach(v => {
+      v.ProductSkuValues = []
+      JSON.parse(v.ProductSku1).forEach(v_sku => {
         v.ProductSkuValues.push(v_sku.value)
       })
-      if (skuList.toString()==v.ProductSkuValues.toString()) {
+      if (skuList.toString() == v.ProductSkuValues.toString()) {
         console.log(v);
         this.setData({
-          'goodsObj.Price':v.Price,
-          'goodsObj.Stock':v.Stock
+          'goodsObj.Price': v.Price,
+          'goodsObj.Stock': v.Stock
         })
       }
     })

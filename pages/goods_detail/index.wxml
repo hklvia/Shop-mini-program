@@ -5,26 +5,24 @@
     </swiper-item>
   </swiper>
 </view>
-
 <!-- 商品价格 -->
-<view class="goods_price">￥<text>{{goodsObj.Price}}</text>
-
+<view class="goods_price">
+  ￥
+  <text>{{goodsObj.Price}}</text>
   <view class="goods_collect" bindtap="handleCollect">
     <text class="iconfont {{isCollect?'icon-favorfill':'icon-favor'}}"></text>
     <view class="collect_text">收藏</view>
   </view>
-
 </view>
 <view class="goods_name_row">
   <view class="goods_name">{{goodsObj.ProductTitle}}</view>
-
 </view>
-<view class="sku_info_group" bind:tap="showSku">
+<view class="sku_info_group" bind:tap="handleCartAdd" data-name="skuInfo">
   <view class="sku_info_left">
     <view class="sku_title">规格</view>
     <view class="sku_info">{{skuDisInfo}}</view>
   </view>
-  <view class="sku_info_right"></view>
+  <!-- <view class="sku_info_right"></view> -->
 </view>
 <!-- 详情 -->
 <view class="goods_info">
@@ -49,7 +47,7 @@
     <view class="iconfont icon-cart"></view>
     <view>购物车</view>
   </navigator>
-  <view class="tool_item btn_cart " bindtap="handleCartAdd">加入购物车</view>
+  <view class="tool_item btn_cart " bindtap="handleCartAdd" data-name="catBtn">加入购物车</view>
   <view class="tool_item btn_buy">立即购买</view>
 </view>
 <van-popup show="{{ showSku }}" closeable position="bottom" round custom-style="height: 80%;" bind:close="onClose">
@@ -91,7 +89,11 @@
       </view>
     </view>
   </view>
-  <view class="sku-bottom">
-    <button>确认</button>
+  <view class="sku-bottom" wx:if="{{isAddCart}}">
+    <button bindtap="handleCartAdd" data-name="ConfirmAddCart">确认</button>
+  </view>
+  <view class="sku-info-bottom" wx:else>
+    <button class="red">加入购物车</button>
+    <button class="yellow">立即购买</button>
   </view>
 </van-popup>
