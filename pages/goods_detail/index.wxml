@@ -31,9 +31,6 @@
   <view class="goods_info_title">图文详情</view>
   <view class="goods_info_content" wx:for="{{goodsObj.ProductDetail}}" wx:key="item">
     <image mode="widthFix" src="{{item.CloudUrl}}"></image>
-    <!-- 富文本 -->
-    <!-- {{goodsObj.ProductDetail}} -->
-    <!-- <rich-text nodes="{{goodsObj.ProductDetail}}"></rich-text> -->
   </view>
 </view>
 <!-- 底部工具栏 -->
