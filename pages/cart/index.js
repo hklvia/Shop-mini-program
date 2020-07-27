@@ -5,14 +5,15 @@ import {
   showModal,
   showToast
 } from "../../utils/asyncWx.js";
-import regeneratorRuntime from '../../lib/runtime/runtime';
+// import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
     address: {},
     cart: [],
     allChecked: false,
     totalPrice: 0,
-    totalNum: 0
+    totalNum: 0,
+    skuSelected: "",
   },
   onShow() {
     // 1 获取缓存中的收货地址信息

@@ -123,6 +123,8 @@ Page({
         //3  不存在 第一次添加
         that.GoodsInfo.num = 1;
         that.GoodsInfo.checked = true;
+        that.GoodsInfo.skuSelected = this.data.skuDisInfo;
+        that.GoodsInfo.skuIfo = this.data.skuList;
         cart.push(that.GoodsInfo);
       } else {
         // 4 已经存在购物车数据 执行 num++
