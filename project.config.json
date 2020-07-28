@@ -101,6 +101,20 @@
           "pathName": "pages/cart/index",
           "query": "goods_id=43985",
           "scene": null
+        },
+        {
+          "id": 5,
+          "name": "支付页面",
+          "pathName": "pages/pay/index",
+          "query": "goods_id=43986",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "支付授权页",
+          "pathName": "pages/auth/index",
+          "query": "goods_id=43986",
+          "scene": null
         }
       ]
     }
