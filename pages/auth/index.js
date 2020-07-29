@@ -17,10 +17,7 @@ Page({
       //   iv,
       //   signature
       // } = e.detail;
-      // 2 获取小程序登录成功后的code
-      const {
-        code
-      } = await login();
+
       // const loginParams = {
       //   encryptedData,
       //   rawData,
@@ -28,20 +25,26 @@ Page({
       //   signature,
       //   code
       // };
+      // 2 获取小程序登录成功后的code
+      const {
+        code
+      } = await login();
       const {
         userInfo
       } = e.detail
 
       //  3 发送请求 获取用户的token
-      const {
-        token
-      } = await request({
+      const token = await request({
         url: "auth/getToken",
-        data: {userInfo,code},
+        data: {
+          userInfo,
+          code
+        },
         method: "post"
       });
+      
       //const token="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIzLCJpYXQiOjE1NjQ3MzAwNzksImV4cCI6MTAwMTU2NDczMDA3OH0.YPt-XeLnjV-_1ITaXGY2FhxmCe4NvXuRnRB8OMCfnPo"
-      // 4 把token存入缓存中 同时跳转回上一个页面
+      // 4 把token存入缓存中 同时跳转回上一个页面      
       wx.setStorageSync("token", token);
       wx.navigateBack({
         delta: 1
