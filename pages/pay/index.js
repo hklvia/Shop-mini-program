@@ -5,6 +5,7 @@ import {
   showModal,
   showToast
 } from "../../utils/asyncWx.js";
+import { request } from "../../request/index.js";
 // import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
@@ -21,9 +22,9 @@ Page({
     let cart = wx.getStorageSync("cart") || [];
     // 过滤后的购物车数组
     cart = cart.filter(v => v.checked);
-    // this.setData({
-    //   address
-    // });
+    this.setData({
+      address
+    });
 
 
     // 1 总价格 总数量
@@ -53,6 +54,7 @@ Page({
         });
         return;
       }
+
       // 3 创建订单
       // 3.1 准备 请求头参数
       // const header = { Authorization: token };
@@ -89,6 +91,7 @@ Page({
           order_number
         }
       });
+      
       // 6 发起微信支付 
       await requestPayment(pay);
       // 7 查询后台 订单状态
