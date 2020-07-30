@@ -28,7 +28,7 @@
         </view>
         <!-- 商品图片 -->
         <navigator class="cart_img_wrap">
-          <image mode="widthFix" src="{{item.ProductMainImg[0].CloudUrl}}"></image>
+          <image mode="widthFix" src="{{item.skuImg}}"></image>
         </navigator>
         <!-- 商品信息 -->
         <view class="cart_info_wrap">
@@ -37,11 +37,11 @@
           <view class="goods_price_wrap">
             <view class="goods_price">￥{{item.Price}}</view>
             <view class="cart_num_tool">
-              <view bindtap="handleItemNumEdit" data-id="{{item.ID}}" data-operation="{{-1}}" class="num_edit">
+              <view bindtap="handleItemNumEdit" data-id="{{item.skuSelected}}" data-operation="{{-1}}" class="num_edit">
                 -
               </view>
               <view class="goods_num">{{item.num}}</view>
-              <view bindtap="handleItemNumEdit" data-id="{{item.ID}}" data-operation="{{1}}" class="num_edit">
+              <view bindtap="handleItemNumEdit" data-id="{{item.skuSelected}}" data-operation="{{1}}" class="num_edit">
                 +
               </view>
             </view>

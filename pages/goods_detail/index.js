@@ -118,13 +118,15 @@ Page({
       let cart = wx.getStorageSync("cart") || [];
 
       // 2 判断 商品对象是否存在于购物车数组中
-      let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID);
+      console.log(this.GoodsInfo);      
+      let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID&&v.skuSelected==this.data.skuDisInfo);
+      
       if (index === -1) {
         //3  不存在 第一次添加
         that.GoodsInfo.num = 1;
         that.GoodsInfo.checked = true;
         that.GoodsInfo.skuSelected = this.data.skuDisInfo;
-        that.GoodsInfo.skuIfo = this.data.skuList;
+        that.GoodsInfo.skuImg = this.data.goodsObj.Img;
         cart.push(that.GoodsInfo);
       } else {
         // 4 已经存在购物车数据 执行 num++
@@ -249,7 +251,7 @@ Page({
         v.ProductSkuValues.push(v_sku.value)
       })
       if (skuList.toString() == v.ProductSkuValues.toString()) {
-        console.log(v);
+        // console.log(v);
         this.setData({
           'goodsObj.Price': v.Price,
           'goodsObj.Stock': v.Stock

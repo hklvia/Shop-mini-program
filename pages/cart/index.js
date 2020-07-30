@@ -129,7 +129,7 @@ Page({
       cart
     } = this.data;
     // 3 找到需要修改的商品的索引
-    const index = cart.findIndex(v => v.ID === id);
+    const index = cart.findIndex(v => v.skuSelected === id);
     // 4 判断是否要执行删除
     if (cart[index].num === 1 && operation === -1) {
       // 4.1 弹窗提示

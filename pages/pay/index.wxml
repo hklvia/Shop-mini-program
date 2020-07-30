@@ -16,7 +16,7 @@
       <view class="cart_item" wx:for="{{cart}}" wx:key="goods_id">
         <!-- 商品图片 -->
         <navigator class="cart_img_wrap">
-          <image mode="widthFix" src="{{item.ProductMainImg[0].CloudUrl}}"></image>
+          <image mode="widthFix" src="{{item.skuImg}}"></image>
         </navigator>
         <!-- 商品信息 -->
         <view class="cart_info_wrap">
