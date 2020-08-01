@@ -1,6 +1,6 @@
 # 1. Shop-mini-program
 ## 1.1. 微信小程序购物商城
-<p align="center">
+<p align="left">
   <a href="http://www.apache.org/licenses/LICENSE-2.0">
     <img src="https://img.shields.io/hexpm/l/plug.svg" alt="License" />
   </a>
