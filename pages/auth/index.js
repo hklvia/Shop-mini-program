@@ -42,8 +42,7 @@ Page({
         },
         method: "post"
       });
-      
-      //const token="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIzLCJpYXQiOjE1NjQ3MzAwNzksImV4cCI6MTAwMTU2NDczMDA3OH0.YPt-XeLnjV-_1ITaXGY2FhxmCe4NvXuRnRB8OMCfnPo"
+
       // 4 把token存入缓存中 同时跳转回上一个页面      
       wx.setStorageSync("token", token);
       wx.navigateBack({

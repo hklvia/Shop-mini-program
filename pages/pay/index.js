@@ -3,9 +3,12 @@ import {
   chooseAddress,
   openSetting,
   showModal,
-  showToast
+  showToast,
+  requestPayment
 } from "../../utils/asyncWx.js";
-import { request } from "../../request/index.js";
+import {
+  request
+} from "../../request/index.js";
 // import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
@@ -63,16 +66,19 @@ Page({
       const consignee_addr = this.data.address.all;
       const cart = this.data.cart;
       let goods = [];
+
       cart.forEach(v => goods.push({
         goods_id: v.goods_id,
         goods_number: v.num,
         goods_price: v.goods_price
       }))
+
       const orderParams = {
         order_price,
         consignee_addr,
         goods
       };
+
       // 4 准备发送请求 创建订单 获取订单编号
       const {
         order_number
@@ -81,6 +87,7 @@ Page({
         method: "POST",
         data: orderParams
       });
+
       // 5 发起 预支付接口
       const {
         pay
@@ -91,9 +98,10 @@ Page({
           order_number
         }
       });
-      
+
       // 6 发起微信支付 
       await requestPayment(pay);
+
       // 7 查询后台 订单状态
       const res = await request({
         url: "/my/orders/chkOrder",

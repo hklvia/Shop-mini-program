@@ -12,13 +12,18 @@ export const request = (params) => {
 
   // 定义公共的url
   const baseUrl = "http://localhost:10549/api/"
+  let token=wx.getStorageSync('token');
+  let header={
+    "Content-Type":"application/json"
+  }
+  if (token) {
+    header['Authorization']=token
+  }
   return new Promise((resolve, reject) => {
     wx.request({
       ...params,
       url: baseUrl + params.url,
-      header:{
-        "Content-Type":"application/json"
-      },
+      header:header,
       success: (result) => {
         resolve(result.data.Data);
       },
