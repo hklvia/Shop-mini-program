@@ -1,26 +1,37 @@
 <view class="pyg_index">
-  <!-- 搜索框开始 -->
+  <!-- 搜索框 开始 -->
   <SearchInput></SearchInput>
-  <!-- 搜索框结束 -->
-  <!-- 轮播图开始 -->
+  <!-- 搜索框 结束 -->
+  <!-- 轮播图 开始 -->
   <view class="index_swiper">
-    <swiper indicator-dots autoplay circular>
+    <!-- 1 swiper标签存在默认的宽度和高度
+        100% * 150px 
+      2 image标签也存在默认的宽度和高度
+        320px * 240px 
+      3 设计图片和轮播图
+        1 先看一下原图的宽高  750 * 340 
+        2 让图片的高度自适应 宽度 等于100%
+        3 让swiper标签的高度 变成和图片的高一样即可 
+      4 图片标签
+        mode属性 渲染模式
+          widthFix  让图片的标签宽高 和 图片标签的内容的宽高都等比例的发生变化 -->
+    <swiper autoplay indicator-dots circular>
       <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-        <navigator url="/pages/goods_detail/goods_detail?goods_id={{item.goods_id}}">
+        <navigator url="{{item.navigator_url}}">
           <image mode="widthFix" src="{{item.image_src}}"></image>
         </navigator>
       </swiper-item>
     </swiper>
   </view>
-  <!-- 轮播图结束 -->
-  <!-- 导航栏开始 -->
+  <!-- 轮播图 结束 -->
+  <!-- 导航 开始 -->
   <view class="index_cate">
-    <navigator url="/pages/category/category" open-type="switchTab" wx:for="{{catesList}}" wx:key="name">
-      <image src="{{item.image_src}}" mode="widthFix"></image>
+    <navigator wx:for="{{catesList}}" wx:key="name" url="/pages/category/index" open-type="switchTab">
+      <image mode="widthFix" src="{{item.image_src}}"></image>
     </navigator>
   </view>
-  <!-- 导航栏结束 -->
-  <!-- 楼层开始 -->
+  <!-- 导航 结束 -->
+  <!-- 楼层 开始 -->
   <view class="index_floor">
     <view class="floor_group" wx:for="{{floorList}}" wx:for-item="item1" wx:for-index="index1" wx:key="floor_title">
       <!-- 标题 -->
@@ -29,11 +40,11 @@
       </view>
       <!-- 内容 -->
       <view class="floor_list">
-        <navigator url="{{item2.navigator_url}}" wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name">
-          <image src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}"></image>
+        <navigator wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name" url="{{item2.navigator_url}}">
+          <image mode="{{index2===0?'widthFix':'scaleToFill'}}" src="{{item2.image_src}}"></image>
         </navigator>
       </view>
     </view>
   </view>
-  <!-- 楼层结束 -->
+  <!-- 楼层 结束 -->
 </view>

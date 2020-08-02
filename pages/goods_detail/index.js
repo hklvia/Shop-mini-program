@@ -152,7 +152,7 @@ Page({
     // 1 获取缓存中的商品收藏数组
     let collect = wx.getStorageSync("collect") || [];
     // 2 判断该商品是否被收藏过
-    let index = collect.findIndex(v => v.goods_id === this.GoodsInfo.goods_id);
+    let index = collect.findIndex(v => v.ID === this.GoodsInfo.ID);
     // 3 当index！=-1表示 已经收藏过 
     if (index !== -1) {
       // 能找到 已经收藏过了  在数组中删除该商品
