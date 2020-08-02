@@ -10,14 +10,12 @@ export const request=(params)=>{
     header["Authorization"]=wx.getStorageSync("token");
   }
 
-
   ajaxTimes++;
   // 显示加载中 效果
   wx.showLoading({
     title: "加载中",
     mask: true
-  });
-    
+  });    
 
   // 定义公共的url
   const baseUrl="https://api.zbztb.cn/api/public/v1";
