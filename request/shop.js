@@ -11,7 +11,7 @@ export const request = (params) => {
   });
 
   // 定义公共的url
-  const baseUrl = "http://localhost:10549/api/"
+  const baseUrl = "http://localhost:50070/api/"
   let token=wx.getStorageSync('token');
   let header={
     "Content-Type":"application/json"
