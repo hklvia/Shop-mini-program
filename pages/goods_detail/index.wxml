@@ -57,7 +57,7 @@
       <view class="sku-main">
         <view>￥{{goodsObj.Price}}</view>
         <text>剩余{{goodsObj.Stock}}件</text>
-        <text>已选择{{skuDisInfo}}</text>
+        <text>{{skuDisInfo}}</text>
       </view>
     </view>
     <!-- <view class="sku-row"

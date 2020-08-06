@@ -56,7 +56,7 @@ Page({
     goodsObj.Product.ProductDetail = JSON.parse(goodsObj.Product.ProductDetail)
     goodsObj.Product.ProductMainImg = JSON.parse(goodsObj.Product.ProductMainImg)
 
-    let skuDisInfo = "请选择 "
+    let skuDisInfo = "请选择："
     goodsObj.Product.ProductSkuValues.forEach(v => {
       v.selectedValue = null
       skuDisInfo += v.name + " "
@@ -118,14 +118,15 @@ Page({
       let cart = wx.getStorageSync("cart") || [];
 
       // 2 判断 商品对象是否存在于购物车数组中
-      console.log(this.GoodsInfo);      
-      let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID&&v.skuSelected==this.data.skuDisInfo);
-      
+      console.log(this.GoodsInfo);
+      let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID && v.skuSelected == this.data.skuDisInfo);
+
       if (index === -1) {
         //3  不存在 第一次添加
         that.GoodsInfo.num = 1;
         that.GoodsInfo.checked = true;
         that.GoodsInfo.skuSelected = this.data.skuDisInfo;
+        that.GoodsInfo.SkuID = this.data.goodsObj.SkuID;
         that.GoodsInfo.skuImg = this.data.goodsObj.Img;
         cart.push(that.GoodsInfo);
       } else {
@@ -200,7 +201,7 @@ Page({
     })
     if (skuDisInfo != "") {
       this.setData({
-        skuDisInfo: "已选择 " + skuDisInfo
+        skuDisInfo: "已选择："+skuDisInfo
       })
     }
   },
@@ -231,7 +232,7 @@ Page({
     let skuList = []
     goodsObj.ProductSkuValues.forEach(v => {
       if (v.selectedValue != null) {
-        skuDisInfo += v.selectedValue + ""
+        skuDisInfo += v.selectedValue + " "
         skuList.push(v.selectedValue)
         if (v.IsImg == 1) {
           v.values.forEach(element => {
@@ -254,14 +255,15 @@ Page({
         // console.log(v);
         this.setData({
           'goodsObj.Price': v.Price,
-          'goodsObj.Stock': v.Stock
+          'goodsObj.Stock': v.Stock,
+          "goodsObj.SkuID": v.ID
         })
       }
     })
 
     if (skuDisInfo != "") {
       this.setData({
-        skuDisInfo: "已选择 " + skuDisInfo
+        skuDisInfo: "已选择："+skuDisInfo + " "
       })
     }
   }

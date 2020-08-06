@@ -5,6 +5,9 @@ import {
   showModal,
   showToast
 } from "../../utils/asyncWx.js";
+import {
+  request
+} from "../../request/shop.js";
 // import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
@@ -76,7 +79,7 @@ Page({
     cart[index].checked = !cart[index].checked;
     this.setCart(cart);
   },
-  
+
   // 设置购物车状态同时 重新计算 底部工具栏的数据 全选 总价格 购买的数量
   setCart(cart) {
     let allChecked = true;
@@ -161,6 +164,7 @@ Page({
       });
       return;
     }
+
     // 2 判断用户有没有选购商品
     if (totalNum === 0) {
       await showToast({
@@ -168,10 +172,10 @@ Page({
       });
       return;
     }
-    // 3 跳转到 支付页面
+
+    // 4 跳转到 支付页面
     wx.navigateTo({
       url: '/pages/pay/index'
     });
-
   }
 })

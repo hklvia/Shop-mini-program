@@ -62,16 +62,17 @@ Page({
       // 3.1 准备 请求头参数
       // const header = { Authorization: token };
       // 3.2 准备 请求体参数
-
       const cart = this.data.cart;
-      let MainOrder = {};
+      let MainOrder = {};      
       let SubOrders = [];
-      MainOrder.TotalPrice = this.data.totalPrice;
-      MainOrder.Address = this.data.address.all;
-
-      cart.forEach(v => SubOrders.push({
+      MainOrder.TotalPrice=this.data.totalPrice;
+      MainOrder.Address=this.data.address.all;
+      console.log(cart);
+      cart.forEach(v => SubOrders.push({        
         ProductID: v.ID,
         Count: v.num,
+        SkuID: v.SkuID,
+        SkuInfo: v.skuSelected,
         ProductPrice: v.Price
       }))
 
@@ -82,15 +83,13 @@ Page({
       console.log(orderParams);
 
       // 4 准备发送请求 创建订单 获取订单编号
-      const {
-        Data
-      } = await request({
+      const Data = await request({
         url: "Order",
         method: "POST",
         data: orderParams
       });
       console.log(Data);
-      
+
 
       // 5 发起 预支付接口
       // const {
