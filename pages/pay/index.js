@@ -63,12 +63,12 @@ Page({
       // const header = { Authorization: token };
       // 3.2 准备 请求体参数
       const cart = this.data.cart;
-      let MainOrder = {};      
+      let MainOrder = {};
       let SubOrders = [];
-      MainOrder.TotalPrice=this.data.totalPrice;
-      MainOrder.Address=this.data.address.all;
+      MainOrder.TotalPrice = this.data.totalPrice;
+      MainOrder.Address = this.data.address.all;
       console.log(cart);
-      cart.forEach(v => SubOrders.push({        
+      cart.forEach(v => SubOrders.push({
         ProductID: v.ID,
         Count: v.num,
         SkuID: v.SkuID,

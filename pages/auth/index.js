@@ -1,7 +1,6 @@
 import {
   request
 } from "../../request/shop.js";
-// import regeneratorRuntime from '../../lib/runtime/runtime';
 import {
   login
 } from "../../utils/asyncWx.js";
@@ -10,21 +9,6 @@ Page({
   // 获取用户信息
   async handleGetUserInfo(e) {
     try {
-      // 1 获取用户信息
-      // const {
-      //   encryptedData,
-      //   rawData,
-      //   iv,
-      //   signature
-      // } = e.detail;
-
-      // const loginParams = {
-      //   encryptedData,
-      //   rawData,
-      //   iv,
-      //   signature,
-      //   code
-      // };
       // 2 获取小程序登录成功后的code
       const {
         code
