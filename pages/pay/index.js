@@ -67,7 +67,7 @@ Page({
       let SubOrders = [];
       MainOrder.TotalPrice = this.data.totalPrice;
       MainOrder.Address = this.data.address.all;
-      console.log(cart);
+      // console.log(cart);
       cart.forEach(v => SubOrders.push({
         ProductID: v.ID,
         Count: v.num,
@@ -80,14 +80,14 @@ Page({
         MainOrder,
         SubOrders
       };
-      console.log(orderParams);
+      // console.log(orderParams);
 
       // 4 准备发送请求 创建订单 获取订单编号
       const Data = await request({
         url: "Order",
         method: "POST",
         data: orderParams
-      });
+      })
       console.log(Data);
 
 

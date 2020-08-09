@@ -12,7 +12,6 @@ Page({
     const {
       code
     } = await login()
-    console.log(code);
 
     // 获取token
     const token = await request({
@@ -21,11 +20,11 @@ Page({
         userInfo,
         code
       },
-      method: "post"
+      method: "post",
     })
-
-    wx.setStorageSync("token", token.token);
-    wx.setStorageSync("refreshToken", token.refreshToken);
+    console.log(token);
+    wx.setStorageSync("token", token);
+    // wx.setStorageSync("refreshToken", token.refreshToken);
     // wx.setStorageSync("userinfo", userInfo);
     wx.navigateBack({
       delta: 1
