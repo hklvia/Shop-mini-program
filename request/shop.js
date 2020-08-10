@@ -51,9 +51,7 @@ const refreshTokenPromise = token => {
       data: {
         rToken: token.RefreshToken
       },
-      header: {
-        'content-type': 'application/json'
-      },
+      header: header,
       method: 'GET',
       success: result => {
         if (result.statusCode == 401 || result.statusCode == 500 || result.data.Code == 500) {
