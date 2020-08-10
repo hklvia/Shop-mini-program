@@ -24,8 +24,6 @@ Page({
     })
     console.log(token);
     wx.setStorageSync("token", token);
-    // wx.setStorageSync("refreshToken", token.refreshToken);
-    // wx.setStorageSync("userinfo", userInfo);
     wx.navigateBack({
       delta: 1
     });
