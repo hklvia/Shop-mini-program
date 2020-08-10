@@ -22,7 +22,7 @@
       <view class="cart_item" wx:for="{{cart}}" wx:key="goods_id">
         <!-- 复选框 -->
         <view class="cart_chk_wrap">
-          <checkbox-group data-id="{{item.ID}}" bindchange="handeItemChange">
+          <checkbox-group data-id="{{item.SkuID}}" bindchange="handeItemChange">
             <checkbox checked="{{item.checked}}"></checkbox>
           </checkbox-group>
         </view>

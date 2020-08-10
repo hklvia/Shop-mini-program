@@ -68,13 +68,13 @@ Page({
   // 商品的选中
   handeItemChange(e) {
     // 1 获取被修改的商品的id
-    const goods_id = e.currentTarget.dataset.id;
+    const SkuID = e.currentTarget.dataset.id;
     // 2 获取购物车数组 
     let {
       cart
     } = this.data;
     // 3 找到被修改的商品对象
-    let index = cart.findIndex(v => v.ID === goods_id);
+    let index = cart.findIndex(v => v.SkuID === SkuID);
     // 4 选中状态取反
     cart[index].checked = !cart[index].checked;
     this.setCart(cart);

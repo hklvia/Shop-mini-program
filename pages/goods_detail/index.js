@@ -1,6 +1,9 @@
 import {
   request
 } from "../../request/shop.js";
+import {
+  showToast
+} from "../../utils/asyncWx.js";
 // import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
 
@@ -12,11 +15,12 @@ Page({
     // 商品是否被收藏
     isCollect: false,
     showSku: false,
+    showAttrs: false,
     // skuList:{},
     skuDisInfo: "",
     skus: [],
     proSkus: [],
-    isAddCart: true
+    isAddCart: true,
   },
 
   // 商品对象
@@ -42,19 +46,18 @@ Page({
     });
 
     this.GoodsInfo = goodsObj.Product;
-
-    // console.log(this.GoodsInfo);
-
     // 1 获取缓存中的商品收藏的数组
     let collect = wx.getStorageSync("collect") || [];
     // 2 判断当前商品是否被收藏
-    // console.log(goodsObj);
+    console.log(goodsObj);
 
     let isCollect = collect.some(v => v.ID === this.GoodsInfo.ID);
     goodsObj.Product.ProductSkuValues = JSON.parse(goodsObj.Product.ProductSkuValues)
     goodsObj.Product.ProductSlideImgs = JSON.parse(goodsObj.Product.ProductSlideImgs)
     goodsObj.Product.ProductDetail = JSON.parse(goodsObj.Product.ProductDetail)
     goodsObj.Product.ProductMainImg = JSON.parse(goodsObj.Product.ProductMainImg)
+    goodsObj.Product.Attrs = goodsObj.Attrs
+    goodsObj.Product.num = 1
 
     let skuDisInfo = "请选择："
     goodsObj.Product.ProductSkuValues.forEach(v => {
@@ -67,15 +70,7 @@ Page({
       // 收藏
       isCollect,
       skuDisInfo: skuDisInfo,
-      // skus:resData.skus,
       proSkus: goodsObj.ProductSkus,
-      // skuList:{
-      //   skuImg:JSON.parse(goodsObj.Product.ProductMainImg),
-      //   Stock:goodsObj.Skus.Stock,
-      //   sku:goodsObj.Skus.map(v => v.ProductSku1)
-      //   // Price:
-      //   // skuName:new Set(goodsObj.Skus)
-      // }
     })
   },
 
@@ -114,6 +109,13 @@ Page({
       return;
       // 点击确认按钮加入购物车
     } else if (e.currentTarget.dataset.name == 'ConfirmAddCart') {
+      if (!this.data.goodsObj.SkuID) {
+        showToast({
+          title: "您还没有选择商品规格",
+          mask: true
+        });
+        return;
+      }
       // 1 获取缓存中的购物车， || []转换成数组格式
       let cart = wx.getStorageSync("cart") || [];
 
@@ -123,7 +125,7 @@ Page({
 
       if (index === -1) {
         //3  不存在 第一次添加
-        that.GoodsInfo.num = 1;
+        that.GoodsInfo.num = this.data.goodsObj.num;
         that.GoodsInfo.checked = true;
         that.GoodsInfo.skuSelected = this.data.skuDisInfo;
         that.GoodsInfo.SkuID = this.data.goodsObj.SkuID;
@@ -131,10 +133,13 @@ Page({
         cart.push(that.GoodsInfo);
       } else {
         // 4 已经存在购物车数据 执行 num++
-        cart[index].num++;
+        cart[index].num += this.data.goodsObj.num;
       }
       // 5 把购物车重新添加回缓存中
       wx.setStorageSync("cart", cart);
+      this.setData({
+        showSku: false
+      });
       // 6 弹窗提示
       wx.showToast({
         title: '加入成功',
@@ -144,7 +149,6 @@ Page({
       });
     }
 
-    // this.setData({});
   },
 
   // 点击 商品收藏图标
@@ -201,7 +205,7 @@ Page({
     })
     if (skuDisInfo != "") {
       this.setData({
-        skuDisInfo: "已选择："+skuDisInfo
+        skuDisInfo: "已选择：" + skuDisInfo
       })
     }
   },
@@ -263,8 +267,68 @@ Page({
 
     if (skuDisInfo != "") {
       this.setData({
-        skuDisInfo: "已选择："+skuDisInfo + " "
+        skuDisInfo: "已选择：" + skuDisInfo + " "
       })
     }
-  }
+  },
+  // 商品数量的编辑功能
+  handleNumEdit(e) {
+    // 1 获取传递过来的参数 
+    const {
+      operation
+    } = e.currentTarget.dataset;
+    if (operation == 1) {
+      this.setData({
+        'goodsObj.num': (this.data.goodsObj.num + 1)
+      })
+    } else {
+      this.setData({
+        'goodsObj.num': this.data.goodsObj.num == 1 ? 1 : (this.data.goodsObj.num - 1)
+      })
+    }
+  },
+  // 点击 展开属性
+  handleAttr() {
+    this.setData({
+      showAttrs: true
+    });
+    return;
+
+    // 1 获取缓存中的购物车， || []转换成数组格式
+    let cart = wx.getStorageSync("cart") || [];
+
+    // 2 判断 商品对象是否存在于购物车数组中
+    // console.log(this.GoodsInfo);
+    // let index = cart.findIndex(v => v.ID === this.GoodsInfo.ID && v.skuSelected == this.data.skuDisInfo);
+
+    // if (index === -1) {
+    //   //3  不存在 第一次添加
+    //   that.GoodsInfo.num = this.data.goodsObj.num;
+    //   that.GoodsInfo.checked = true;
+    //   that.GoodsInfo.skuSelected = this.data.skuDisInfo;
+    //   that.GoodsInfo.SkuID = this.data.goodsObj.SkuID;
+    //   that.GoodsInfo.skuImg = this.data.goodsObj.Img;
+    //   cart.push(that.GoodsInfo);
+    // } else {
+    //   // 4 已经存在购物车数据 执行 num++
+    //   cart[index].num += this.data.goodsObj.num;
+    // }
+    // // 5 把购物车重新添加回缓存中
+    // wx.setStorageSync("cart", cart);
+    // this.setData({
+    //   showSku: false
+    // });
+    // // 6 弹窗提示
+    // wx.showToast({
+    //   title: '加入成功',
+    //   icon: 'success',
+    //   // true 防止用户 手抖 疯狂点击按钮 
+    //   mask: true
+    // });    
+  },
+  onAttrsClose() {
+    this.setData({
+      showAttrs: false
+    });
+  },
 })

@@ -12,56 +12,72 @@ page {
 }
 
 .goods_price {
+  /* display: flex;
+justify-content: space-between; */
+  width: 100%;
+}
+
+/*价格 */
+.priceBlock {
+  margin-top: 12px;
+  padding: 0 18px;
   display: flex;
-  padding: 15rpx;
-  font-size: 30rpx;
-  /* font-weight: 600; */
-  color: var(--themeColor);
+  justify-content: space-between;
 }
 
-.goods_price text {
-  flex: 1;
-  padding: 15rpx;
-  font-size: 50rpx;
-  font-weight: 600;
-  color: var(--themeColor);
-}
-
-/* 收藏图标 */
-.goods_collect {
+.price {
+  font-family: JDZH-Regular;
+  line-height: 30px;
+  color: #f2270c;
   display: inline-block;
-  flex-direction: column;
-  justify-content: right;
-  align-items: center;
-  border-left: 1rpx solid #000;
 }
 
+.price em {
+  font-size: 30px;
+  font-style: normal;
+  /* line-height: 30px; */
+  color: #f2270c;
+}
+/* 收藏图标 */
+.favour {
+  background-size: 100%;
+  line-height: 1em;
+  font-size: 10px;
+  color: #262626;
+}
 
+.col_right {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.iconfont {
+  font-size: 18px;
+}
+
+/* 商品名称 */
 .goods_name_row {
-  border-top: 5rpx solid #dedede;
-  border-bottom: 5rpx solid #dedede;
-  padding: 10rpx 0;
+  border-top: 1rpx solid #dedede;
+  border-bottom: 1rpx solid #dedede;
+  padding: 10rpx 10rpx;
   display: flex;
 }
 
 .goods_name_row .goods_name {
   flex: 5;
   color: #000;
-  font-size: 30rpx;
+  font-size: 35rpx;
   padding: 0 10rpx;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.goods_name_row {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-left: 1rpx solid #000;
+  -webkit-line-clamp: 3;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing:0.8px
 }
 
 .goods_name_row .goods_collect .icon-shoucang1 {
@@ -133,7 +149,7 @@ page {
 .sku-list {
   position: relative;
   padding: 20rpx 40rpx;
-  margin-bottom: 100rpx;
+  margin-bottom: 50rpx;
 }
 
 .sku-list .sku-title {
@@ -277,13 +293,6 @@ page {
   background-image: linear-gradient(135deg, #ffba0d, #ffc30d 69%, #ffcf0d);
 }
 
-
-
-
-
-
-
-
 .active {
   color: rgb(242, 39, 12);
   background-color: rgb(252, 237, 235);
@@ -295,7 +304,7 @@ page {
   display: flex;
   justify-content: space-between;
   background-color: #ffffff;
-  margin: 30rpx 0;
+  margin: 10rpx 0;
 }
 
 .sku_info_group .sku_info_left {
@@ -306,7 +315,7 @@ page {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30rpx;
+  padding:15rpx 18rpx;
   color: #999999;
 }
 
@@ -314,13 +323,6 @@ page {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: #333;
-}
-
-.sku_info_group .sku_info_right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 30rpx;
-  color: #cccccc;
+  color: rgb(31, 31, 31);
+  font-weight: 500;
 }
