@@ -16,8 +16,8 @@ Page({
     isCollect: false,
     showSku: false,
     showAttrs: false,
-    // skuList:{},
     skuDisInfo: "",
+    attrsInfo: "",
     skus: [],
     proSkus: [],
     isAddCart: true,
@@ -48,9 +48,8 @@ Page({
     this.GoodsInfo = goodsObj.Product;
     // 1 获取缓存中的商品收藏的数组
     let collect = wx.getStorageSync("collect") || [];
+    
     // 2 判断当前商品是否被收藏
-    console.log(goodsObj);
-
     let isCollect = collect.some(v => v.ID === this.GoodsInfo.ID);
     goodsObj.Product.ProductSkuValues = JSON.parse(goodsObj.Product.ProductSkuValues)
     goodsObj.Product.ProductSlideImgs = JSON.parse(goodsObj.Product.ProductSlideImgs)
@@ -65,11 +64,24 @@ Page({
       skuDisInfo += v.name + " "
     })
 
+    // 设置商品属性
+    let attrsInfo = ""
+    goodsObj.Product.Attrs.forEach(v=> {      
+      if (attrsInfo.split(" ").length>4) {
+        if (attrsInfo.indexOf(". . .")<0) {
+          attrsInfo += ". . ."
+        }
+        return
+      }
+      attrsInfo += JSON.parse(v.ProductAttrs).AttrName + " "
+    })
+
     this.setData({
       goodsObj: goodsObj.Product,
       // 收藏
       isCollect,
       skuDisInfo: skuDisInfo,
+      attrsInfo: attrsInfo,
       proSkus: goodsObj.ProductSkus,
     })
   },

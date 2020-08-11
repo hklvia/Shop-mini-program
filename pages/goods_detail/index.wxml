@@ -40,7 +40,7 @@
 <view class="sku_info_group" bind:tap="handleAttr">
   <view class="sku_info_left">
     <view class="sku_title">参数</view>
-    <view class="sku_info">{{skuDisInfo}}</view>
+    <view class="sku_info">{{attrsInfo}}</view>
   </view>
 </view>
 <!-- 详情 -->

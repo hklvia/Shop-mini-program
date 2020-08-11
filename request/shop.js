@@ -88,7 +88,6 @@ const CommonPromise = params => {
       success: (result) => {
         console.log("访问" + params.url + "页面，返回：" + result.data.Code);
         if (result.statusCode == 200 && result.data.Code == 200) {
-          console.log(result.data);
           resolve(result.data.Data)
         } else if (result.statusCode == 401 || result.statusCode == 500 || result.data.Code == 500) {
           wx.navigateTo({
