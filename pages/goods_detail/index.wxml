@@ -108,19 +108,16 @@
   </view>
 </van-popup>
 <!-- 商品属性弹出框 -->
-<van-popup show="{{ showAttrs }}" closeable position="bottom" round custom-style="height: 80%;" bind:close="onAttrsClose">
-  <view class="sku-title">产品参数</view>
-  <view class="skus">
-    <view class="sku-row" wx:for="{{goodsObj.ProductSkuValues}}" wx:key="id">
-      <text>{{item.name}}</text>
-      <view class="sku-item">
-        <view class="sku-item {{item1.value==item.selectedValue?'active':''}}" wx:for="{{item.values}}" wx:for-item="item1" wx:key="id" bind:tap="handleSkuChange" data-attrName="{{item.name}}" data-attrValue="{{item1.value}}">
-          {{item1.value}}
-        </view>
-      </view>
+<van-popup show="{{ showAttrs }}" closeable position="bottom" round custom-style="height: 70%;" bind:close="onAttrsClose">
+  <view class="attr-title">产品参数</view>
+  <view class="attr" wx:for="{{goodsObj.Attrs}}" wx:key="item">
+    <view class="attrList">
+      <view class="attrName">{{item.AttrName}}</view>
+      <view class="attrValue">{{item.AttrValue}}</view>
     </view>
+    <view class="line"></view>
   </view>
   <view class="sku-bottom">
-    <button bindtap="handleCartAdd" data-name="ConfirmAddCart">完成</button>
+    <button bindtap="onAttrsClose">完成</button>
   </view>
 </van-popup>

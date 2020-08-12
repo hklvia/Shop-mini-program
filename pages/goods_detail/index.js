@@ -48,14 +48,17 @@ Page({
     this.GoodsInfo = goodsObj.Product;
     // 1 获取缓存中的商品收藏的数组
     let collect = wx.getStorageSync("collect") || [];
-    
+
     // 2 判断当前商品是否被收藏
     let isCollect = collect.some(v => v.ID === this.GoodsInfo.ID);
     goodsObj.Product.ProductSkuValues = JSON.parse(goodsObj.Product.ProductSkuValues)
     goodsObj.Product.ProductSlideImgs = JSON.parse(goodsObj.Product.ProductSlideImgs)
     goodsObj.Product.ProductDetail = JSON.parse(goodsObj.Product.ProductDetail)
     goodsObj.Product.ProductMainImg = JSON.parse(goodsObj.Product.ProductMainImg)
-    goodsObj.Product.Attrs = goodsObj.Attrs
+    goodsObj.Product.Attrs = []
+    goodsObj.Attrs.map(v=>{
+      goodsObj.Product.Attrs.push(JSON.parse(v.ProductAttrs))
+    })
     goodsObj.Product.num = 1
 
     let skuDisInfo = "请选择："
@@ -64,16 +67,16 @@ Page({
       skuDisInfo += v.name + " "
     })
 
-    // 设置商品属性
+    // 设置商品属性名称展示
     let attrsInfo = ""
-    goodsObj.Product.Attrs.forEach(v=> {      
-      if (attrsInfo.split(" ").length>4) {
-        if (attrsInfo.indexOf(". . .")<0) {
+    goodsObj.Product.Attrs.forEach(v => {
+      if (attrsInfo.split(" ").length > 4) {
+        if (attrsInfo.indexOf(". . .") < 0) {
           attrsInfo += ". . ."
         }
         return
       }
-      attrsInfo += JSON.parse(v.ProductAttrs).AttrName + " "
+      attrsInfo += v.AttrName + " "
     })
 
     this.setData({

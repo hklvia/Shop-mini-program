@@ -38,6 +38,7 @@ justify-content: space-between; */
   /* line-height: 30px; */
   color: #f2270c;
 }
+
 /* 收藏图标 */
 .favour {
   background-size: 100%;
@@ -77,7 +78,7 @@ justify-content: space-between; */
   -webkit-line-clamp: 3;
   font-weight: 600;
   line-height: 21px;
-  letter-spacing:0.8px
+  letter-spacing: 0.8px
 }
 
 .goods_name_row .goods_collect .icon-shoucang1 {
@@ -315,7 +316,7 @@ justify-content: space-between; */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:15rpx 18rpx;
+  padding: 15rpx 18rpx;
   color: #999999;
 }
 
@@ -325,4 +326,46 @@ justify-content: space-between; */
   align-items: center;
   color: rgb(31, 31, 31);
   font-weight: 500;
+}
+
+/* 属性弹出框 */
+.attr {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.attr-title {
+  flex: 1;
+  font-size: large;
+  height: 100rpx;
+  color: #333;
+  text-align: center;
+  padding: 30rpx 0rpx 20rpx;
+}
+
+.attrList {
+  flex: 1;
+  font-size: 35rpx;
+  height: 25rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 20rpx;
+  margin-bottom: 5rpx;
+}
+
+.attrName {
+  width: 120rpx;
+  padding-left: 25rpx;
+font-weight: 800;
+}
+
+.attrValue {
+  flex: 1;
+  padding-left: 30rpx;
+}
+.line{
+  margin: 10rpx 15rpx 0rpx 15rpx;
+  border-bottom: 1rpx solid rgb(221, 214, 214);
 }
