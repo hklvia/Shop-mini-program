@@ -18,7 +18,7 @@
           <text class="delimiter">/</text>
         </view>
         <view class="goods_list">
-          <navigator wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2" wx:key="ID" url="/pages/goods_list/index?keyWord={{item2.KeyWords}}">
+          <navigator wx:for="{{item1.children}}" wx:for-item="item2" wx:for-index="index2" wx:key="ID" url="/pages/goods_list/index?keyWord={{item2.KeyWords}}" hover-class="none">
             <image mode="widthFix" src="{{item2.Img.CloudUrl}}"></image>
             <view class="goods_name">{{item2.Name}}</view>
           </navigator>

@@ -7,7 +7,7 @@
   <!-- <block wx:for="{{tabs}}" wx:if="{{item.isActive}}" wx:key="id"> -->
   <block wx:if="{{tabs[0].isActive}}">
     <view class="first_tab">
-      <navigator class="goods_item" wx:for="{{goodsList}}" wx:key="ID" url="/pages/goods_detail/index?id={{item.ID}}">
+      <navigator class="goods_item" wx:for="{{goodsList}}" wx:key="ID" url="/pages/goods_detail/index?id={{item.ID}}" hover-class="none">
         <!-- 左侧 图片容器 -->
         <view class="goods_img_wrap">
           <image mode="widthFix" src="{{item.ProductMainImg[0].CloudUrl?item.ProductMainImg[0].CloudUrl:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}"></image>

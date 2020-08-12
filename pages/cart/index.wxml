@@ -27,12 +27,15 @@
           </checkbox-group>
         </view>
         <!-- 商品图片 -->
-        <navigator class="cart_img_wrap">
+        <navigator class="cart_img_wrap" url="/pages/goods_detail/index?id={{item.ID}}" hover-class="none">
           <image mode="widthFix" src="{{item.skuImg}}"></image>
         </navigator>
         <!-- 商品信息 -->
         <view class="cart_info_wrap">
-          <view class="goods_name">{{item.ProductTitle}}</view>
+          <!-- <view class="goods_name">{{item.ProductTitle}}</view> -->
+          <navigator url="/pages/goods_detail/index?id={{item.ID}}" class="goods_name" hover-class="none">
+            {{item.ProductTitle}}
+          </navigator>
           <view class="sku_info">{{item.skuSelected}}</view>
           <view class="goods_price_wrap">
             <view class="goods_price">￥{{item.Price}}</view>
