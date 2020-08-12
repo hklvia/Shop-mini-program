@@ -348,7 +348,7 @@ justify-content: space-between; */
 .attrList {
   flex: 1;
   font-size: 35rpx;
-  height: 25rpx;
+  /* height: 25rpx; */
   display: flex;
   flex-wrap: nowrap;
   margin-top: 20rpx;
@@ -358,14 +358,15 @@ justify-content: space-between; */
 .attrName {
   width: 120rpx;
   padding-left: 25rpx;
-font-weight: 800;
+  font-weight: 800;
 }
 
 .attrValue {
   flex: 1;
   padding-left: 30rpx;
 }
-.line{
+
+.line {
   margin: 10rpx 15rpx 0rpx 15rpx;
   border-bottom: 1rpx solid rgb(221, 214, 214);
 }
