@@ -9,8 +9,8 @@
   1 节流 一般是用在页面下拉和上拉 
   1 定义全局的定时器id
  */
-import { request } from "../../request/index.js";
-import regeneratorRuntime from '../../lib/runtime/runtime';
+import { request } from "../../request/shop.js";
+// import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
   data: {
     goods:[],
@@ -47,10 +47,11 @@ Page({
 
   // 发送请求获取搜索建议 数据
   async qsearch(query){
-    const res=await request({url:"/goods/qsearch",data:{query}});
+    const res=await request({url:"product",method:'post',data:{keyWord:query, pageIndex:1,pageSize:20}});
+    // const res=await request({url:"/goods/qsearch",data:{query}});
     console.log(res);
     this.setData({
-      goods:res
+      goods:res.data
     })
   },
   
