@@ -12,5 +12,7 @@
   </a>
 </P>
 
+项目展示：
+![](http://docpic.hklvia.top/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B1%95%E7%A4%BA.gif)
 后台基于[Asp.Net](https://github.com/hklvia/Shop)
 目前更新中....

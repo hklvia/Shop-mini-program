@@ -122,9 +122,9 @@ Page({
       // wx.setStorageSync("cart", newCart);
 
       // // 8 支付成功了 跳转到订单页面
-      // wx.navigateTo({
-      //   url: '/pages/order/index'
-      // });
+      wx.navigateTo({
+        url: '/pages/order/index?type=1'
+      });
 
     } catch (error) {
       await showToast({

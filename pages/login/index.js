@@ -12,7 +12,7 @@ Page({
     const {
       code
     } = await login()
-
+    wx.setStorageSync("userinfo", userInfo);
     // 获取token
     const token = await request({
       url: "auth/getToken",
